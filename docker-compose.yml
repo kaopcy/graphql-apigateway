@@ -1,0 +1,42 @@
+version: '3.7'
+services:
+  # gateway:
+  #   build: ./gateway/
+  #   container_name: gateway
+  #   volumes:
+  #     - ./gateway/./:/gateway
+  #   ports:
+  #     - 3001:3001
+  #   command: npm run start
+  # server:
+  #   build: ./server/
+  #   container_name: server
+  #   volumes:
+  #     - ./server/./:/server
+  #   ports:
+  #     - 3000:3000
+  #   command: npm run start
+  #   env_file:
+  #     - .env
+  #   depends_on:
+  #     - mongodb
+  #   links:
+  #     - mongodb
+  mongodb:
+    image: mongo
+    container_name: mongodb
+    restart: unless-stopped
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=test
+      - MONGO_INITDB_ROOT_PASSWORD=test
+    env_file:
+      - .env
+    ports:
+      - 27017:27017
+    volumes:
+      - mongodb:/data/db
+
+volumes:
+  mongodb:
+  mongodb_config:
+    
